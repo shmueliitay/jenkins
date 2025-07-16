@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKERHUB_USERNAME = 'itay80'
         DOCKERHUB_PASSWORD = credentials('docker')
-        DOCKERHUB_REPO = 'itay80/jenkins-work'
+        DOCKERHUB_REPO = 'jenkins-work'
         IMAGE_TAG = "${env.BUILD_NUMBER}"
     }
 
