@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         DOCKERHUB_USERNAME = 'itay80'
+        DOCKERHUB_PASSWORD = credentials('docker')
         DOCKERHUB_REPO = 'jenkins-work'
         IMAGE_TAG = "${env.BUILD_NUMBER}"
     }
@@ -14,15 +15,6 @@ pipeline {
             }
         }
 
-        stage('Debug Permissions') { // <--- ADD THIS NEW STAGE
-            steps {
-                script {
-                    sh 'whoami' // Show the user running the command
-                    sh 'groups' // Show the groups the current user belongs to
-                    sh 'ls -l /var/run/docker.sock' // Show permissions of the Docker socket
-                }
-            }
-        }
 
         stage('Build Docker Image') {
             steps {
