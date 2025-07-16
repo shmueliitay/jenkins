@@ -20,12 +20,13 @@ pipeline {
 
         stage('Login to Docker Hub') {
             steps {
-                sh '''
-                echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin
-                '''
+             script {
+                withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKERHUB_USER_VAR', passwordVariable: 'DOCKERHUB_PASSWORD_VAR')]) {
+                sh "echo ${DOCKERHUB_PASSWORD_VAR} | docker login -u ${DOCKERHUB_USER_VAR} --password-stdin"
             }
         }
-
+    }
+}
         stage('Push Docker Image to Docker Hub') {
             steps {
                 sh '''
