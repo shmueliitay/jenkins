@@ -13,7 +13,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 sh '''
-                cd ci-pipeline
+                cd CI-pipeline
                 docker build -t $DOCKERHUB_USERNAME/$DOCKERHUB_REPO:$IMAGE_TAG .
                 '''
             }
